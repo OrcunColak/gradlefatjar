@@ -1,0 +1,36 @@
+apply plugin: 'groovy'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+}
+
+project.ext.repos = {
+    //If we want to make a local build without VPN
+    //we need these repositories
+    if (!System.getenv('BUILD_ID')) {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        google()
+    }
+    maven {url "https://plugins.gradle.org/m2/"}
+
+}
+
+repositories(project.ext.repos)
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation "com.github.jengelman.gradle.plugins:shadow:6.0.0"
+
+
+}
+
+test {
+    useJUnitPlatform()
+}

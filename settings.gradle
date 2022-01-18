@@ -1,0 +1,4 @@
+rootProject.name = 'gradlefatjar'
+include 'mainmodule'
+include 'mainmodule2'
+
